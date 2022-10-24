@@ -1,6 +1,5 @@
 package easy.tuto.bottomnavigationfragmentdemo;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -14,9 +13,10 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
-    HomeFragment homeFragment = new HomeFragment();
-    SettingsFragment settingsFragment = new SettingsFragment();
-    NotificationFragment notificationFragment = new NotificationFragment();
+    BerechnungFragment berechnungFragment = new BerechnungFragment();
+    Verlaufragment verlaufragment = new Verlaufragment();
+    HandbuchFragment handbuchFragment = new HandbuchFragment();
+    ErgebnisFragment ergebnisFragment = new ErgebnisFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,27 +25,25 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView  = findViewById(R.id.bottom_navigation);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
-
-        BadgeDrawable badgeDrawable = bottomNavigationView.getOrCreateBadge(R.id.notification);
-        badgeDrawable.setVisible(true);
-        badgeDrawable.setNumber(8);
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, berechnungFragment).commit();
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.home:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container,homeFragment).commit();
+                    case R.id.berechnung:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, berechnungFragment).commit();
                         return true;
-                    case R.id.notification:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container,notificationFragment).commit();
+                    case R.id.ergebnis:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, ergebnisFragment).commit();
                         return true;
-                    case R.id.settings:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container,settingsFragment).commit();
+                    case R.id.handbuch:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, handbuchFragment).commit();
+                        return true;
+                    case R.id.verlauf:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, verlaufragment).commit();
                         return true;
                 }
-
                 return false;
             }
         });
